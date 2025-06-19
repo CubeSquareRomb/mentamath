@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.pow
 import kotlin.random.Random
 
 class Engine(val mode: String, val diff: String) {
@@ -98,12 +99,39 @@ class Engine(val mode: String, val diff: String) {
         answer = a/b
     }
 
+    fun generateExponentTask() {
+        val (minA, maxA) = when(diff) {
+            "Easy" -> Pair(2, 2)
+            "Medium" -> Pair(2, 9)
+            "Hard" -> Pair(11, 99)
+            "Extreme" -> Pair(11, 99)
+            else -> Pair(0, 1)
+        }
+
+        val (minB, maxB) = when(diff) {
+            "Easy" -> Pair(2, 16)
+            "Medium" -> Pair(3, 4)
+            "Hard" -> Pair(2, 2)
+            "Extreme" -> Pair(3, 3)
+            else -> Pair(0, 1)
+        }
+
+        val a = Random.nextInt(minA, maxA+1)
+        val b = Random.nextInt(minB, maxB+1)
+
+        task = "$a^$b"
+        answer = a.toDouble().pow(b.toDouble()).toInt()
+    }
+
+
+
     fun generateTask() {
         return when (mode) {
             "add" -> generateAdditionTask()
             "sub" -> generateSubtractionTask()
             "mul" -> generateMultiplicationTask()
             "div" -> generateDivisionTask()
+            "exp" -> generateExponentTask()
             else -> throw IllegalArgumentException("Invalid mode: $mode")
         }
     }
@@ -131,7 +159,7 @@ fun getDivisors(n: Int): MutableList<Int> {
 }
 
 fun main() {
-    val engine = Engine("div", "Extreme")
+    val engine = Engine("exp", "Extreme")
 
     engine.generateTask()
 
