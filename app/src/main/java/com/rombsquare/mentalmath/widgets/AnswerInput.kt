@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -43,7 +43,11 @@ fun AnswerInput(
     ) {
         OutlinedTextField(
             value = message,
-            onValueChange = { message = it },
+            onValueChange = {
+                if (it.matches(Regex("-?\\d*"))) {
+                    message = it
+                }
+            },
             placeholder = { Text("Answer...") },
             modifier = Modifier
                 .weight(1f)
@@ -76,7 +80,7 @@ fun AnswerInput(
                 .background(MaterialTheme.colorScheme.primary, CircleShape)
         ) {
             Icon(
-                imageVector = Icons.Default.Send,
+                imageVector = Icons.AutoMirrored.Filled.Send,
                 contentDescription = "Send",
                 tint = Color.White
             )
