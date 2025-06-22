@@ -1,4 +1,4 @@
-package com.rombsquare.mentalmath.widgets
+package com.rombsquare.mentalmath.game
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AnswerInput(
     modifier: Modifier = Modifier,
-    onSend: (String) -> Unit
+    onSend: (Int) -> Unit
 ) {
     var message by remember { mutableStateOf("") }
 
@@ -60,7 +60,7 @@ fun AnswerInput(
             keyboardActions = KeyboardActions(
                 onSend = {
                     if (message.isNotBlank()) {
-                        onSend(message)
+                        onSend(message.toInt())
                         message = ""
                     }
                 }
@@ -71,7 +71,7 @@ fun AnswerInput(
         IconButton(
             onClick = {
                 if (message.isNotBlank()) {
-                    onSend(message)
+                    onSend(message.toInt())
                     message = ""
                 }
             },

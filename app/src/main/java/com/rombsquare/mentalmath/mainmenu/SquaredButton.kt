@@ -1,4 +1,4 @@
-package com.rombsquare.mentalmath.widgets
+package com.rombsquare.mentalmath.mainmenu
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,19 +12,25 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SquaredButton(text: String, width: Int, color: Color, onClick: () -> Unit) {
+fun SquaredButton(
+    modifier: Modifier = Modifier,
+    symbol: String,
+    size: Int,
+    color: Color,
+    onClick: () -> Unit
+) {
     Button(
         onClick = onClick,
-        shape = RoundedCornerShape((width/4).dp),
+        shape = RoundedCornerShape((size/4).dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = color
         ),
-        modifier = Modifier
-            .size(width.dp)
+        modifier = modifier
+            .size(size.dp)
     ) {
         Text(
-            text=text,
-            fontSize=(width / 1.5).sp,
+            text=symbol,
+            fontSize=(size / 1.5).sp,
             color= Color.Black,
         )
     }

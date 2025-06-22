@@ -1,5 +1,7 @@
-package com.rombsquare.mentalmath
+package com.rombsquare.mentalmath.game
+
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlin.math.max
@@ -10,8 +12,8 @@ import kotlin.random.Random
 class Engine(val mode: String, val diff: String) {
 
     var task by mutableStateOf("<no task>")
-    var answer by mutableStateOf(0)
-    var solved by mutableStateOf(0)
+    var answer by mutableIntStateOf(0)
+    var solved by mutableIntStateOf(0)
 
     init {
         generateTask()

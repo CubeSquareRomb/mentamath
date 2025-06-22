@@ -5,8 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.rombsquare.mentalmath.screens.GameScreen
-import com.rombsquare.mentalmath.screens.MainMenu
+import com.rombsquare.mentalmath.game.GameScreen
+import com.rombsquare.mentalmath.mainmenu.MainMenu
 
 @Composable
 fun NavigationApp() {
@@ -25,7 +25,11 @@ fun NavigationApp() {
         ) { backStackEntry ->
             val difficulty = backStackEntry.arguments?.getString("difficulty") ?: "Easy"
             val sign = backStackEntry.arguments?.getString("sign") ?: "+"
-            GameScreen(navController, difficulty, sign)
+            GameScreen(
+                navController,
+                Operation.entries.first {it.string == sign},
+                Diff.entries.first {it.string.lowercase() == difficulty}
+            )
         }
     }
 }
